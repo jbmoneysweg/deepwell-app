@@ -32,7 +32,7 @@ const Seriesgraph: React.FC = () => {
                 labels: timestampLabels,
                 datasets: [
                     {
-                        label: 'Tubing Pressure',
+                        label: 'Tubing Pressure (psi)',
                         data: data.data[2],
                         borderColor: 'rgb(75, 192, 192)',
                         fill: false
@@ -44,7 +44,7 @@ const Seriesgraph: React.FC = () => {
                 labels: timestampLabels,
                 datasets: [
                     {
-                        label: 'Casing Pressure',
+                        label: 'Casing Pressure (psi)',
                         data: data.data[3],
                         borderColor: 'rgb(255, 99, 132)',
                         fill: false
@@ -56,7 +56,7 @@ const Seriesgraph: React.FC = () => {
                 labels: timestampLabels,
                 datasets: [
                     {
-                        label: 'Depth',
+                        label: 'Depth (ft)',
                         data: data.data[1],
                         borderColor: 'rgb(54, 162, 235)',
                         fill: false

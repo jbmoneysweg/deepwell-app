@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Chart from 'chart.js/auto';
-import 'chartjs-plugin-zoom';
+import { Chart }  from 'chart.js/auto';
+import zoomPlugin from 'chartjs-plugin-zoom';
 
 const Seriesgraph: React.FC = () => {
     const [data, setData] = useState<any>(null);
@@ -66,6 +66,7 @@ const Seriesgraph: React.FC = () => {
 
             const createChart = (canvasId: string, chartData: any) => {
                 const ctx = document.getElementById(canvasId) as HTMLCanvasElement;
+                Chart.register(zoomPlugin)
                 new Chart(ctx, {
                     type: 'line',
                     data: chartData,
@@ -87,10 +88,6 @@ const Seriesgraph: React.FC = () => {
                         },
                         plugins: {
                             zoom: {
-                                pan: {
-                                    enabled: true,
-                                    mode: 'xy'
-                                },
                                 zoom: {
                                     wheel: {
                                         enabled: true,
@@ -107,18 +104,32 @@ const Seriesgraph: React.FC = () => {
             };
 
             createChart('myChart1', tubingPressureData);
-            createChart('myChart2', casingPressureData);
             createChart('myChart3', depthData);
+            createChart('myChart2', casingPressureData);
+            
         }
     }, [data]);
 
+    const handleChartButtonClick = (name: String) => {
+        var charts = document.getElementsByClassName("chart-canvas");
+        for (var i = 0; i < charts.length; i++) {
+            charts[i].style.display = "none";
+        }
+        document.getElementById(name).style.display = "block";
+    };
+
     return (
         <div>
+            <div>
+                        <button onClick={() => handleChartButtonClick('myChart1')}>Tubing Pressure Chart</button>
+                        <button onClick={() => handleChartButtonClick('myChart2')}>Casing Pressure Chart</button>
+                        <button onClick={() => handleChartButtonClick('myChart3')}>Depth Chart</button>
+                    </div>
             {data ? (
                 <div style={{ display: 'flex',  flexDirection: 'column'}}>
-                    <canvas id="myChart1" className="chart-canvas"></canvas>
-                    <canvas id="myChart2" className="chart-canvas"></canvas>
-                    <canvas id="myChart3" className="chart-canvas"></canvas>
+                    <canvas id="myChart1" className="chart-canvas" style={{ display: 'none'}}></canvas>
+                    <canvas id="myChart2" className="chart-canvas" style={{ display: 'none'}}></canvas>
+                    <canvas id="myChart3" className="chart-canvas" style={{ display: 'none'}}></canvas>
                 </div>
             ) : (
                 <p>Loading...</p>

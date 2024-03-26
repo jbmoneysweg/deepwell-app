@@ -5,11 +5,10 @@ import './App.css'
 import Seriesgraph from './components/Seriesgraph'
 
 function App() {
-  const [count, setCount] = useState(0)
   return (
     <>
     <div>
-        <a href="https://vitejs.dev" target="_blank">
+        <a href="https://deepwellservices.com/" target="_blank">
           <img src='https://api.boresite.io/storage/v1/object/public/assessment/demo-co.png' className="logo" alt="Vite logo" />
         </a>
       </div>
